@@ -58,11 +58,11 @@ fi
 CPUS="$(nproc)"
 make_all_feats() {
     DATABASE=$1
-    rm festival/coeffs/cg_all.{feats,mcep}
     awk '{print $2}' "$DATABASE" | parallel -j"$CPUS" --bar --progress cat festival/coeffs/{}.feats >>festival/coeffs/cg_all.feats
     awk '{print $2}' "$DATABASE" | parallel -j"$CPUS" --bar --progress cat festival/coeffs/{}.mcep >>festival/coeffs/cg_all.mcep
     cut --complement -f2 -d" " festival/coeffs/cg_all.feats | sort -g >festival/coeffs/cg_all_sorted.feats
     cat festival/coeffs/cg_all.mcep | sort -g >festival/coeffs/cg_all_sorted.mcep
+    rm festival/coeffs/cg_all.{feats,mcep}
 }
 
 make_units() {
@@ -88,7 +88,7 @@ make_feats_by_units() {
     cut -d " " -f 2- festival/feats/"$UNIT".feats >$$.mcep
     paste -d " " $$.f0 $$.mcep >festival/feats/"$UNIT"_f0.feats
     rm -f $$.f0 $$.mcep
-
+    rm -f "$UNIT".mcep.unsorted "$UNIT".feats.unsorted
     rm $TMP.*
 }
 
