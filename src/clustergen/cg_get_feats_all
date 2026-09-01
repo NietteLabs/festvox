@@ -31,7 +31,7 @@
 ##                                                                       ##
 ###########################################################################
 ##                                                                       ##
-##  Author: Pallas13 (edsondasilvaguedes0@gmail) 2025                    ##
+##  Author: Pallas13 (pallasdasilvaguedes0@gmail) 2025                   ##
 ##                                                                       ##
 ###########################################################################
 ##                                                                       ##
@@ -42,10 +42,10 @@
 ###########################################################################
 
 if command -v parallel >&2; then
-    echo parallel is available, using parallel version.
+    echo "Parallel command is available, using parallel version."
     PARALLEL=1
 else
-    echo parallel is not available, using single process.
+    echo "Parallel command is not available, using single process."
     PARALLEL=0
 fi
 
@@ -95,7 +95,7 @@ make_feats_by_units() {
 
 export -f make_feats_by_units
 
-make_all_feats $1s
+make_all_feats $1
 make_units
 
 if (("$PARALLEL" == "1")); then
